@@ -64,7 +64,7 @@ class MaterialsModel extends Model {
 		$stmt->bindValue(":slug", $this->translit_slug($name), PDO::PARAM_STR);
 		$stmt->execute();
 		return true;
-		} catch (Exception) {
+		} catch (Exception $ex) {
 			return false;
 		}
 	}
@@ -84,7 +84,7 @@ class MaterialsModel extends Model {
 		$stmt->bindValue(":slug", $slug, PDO::PARAM_STR);
 		$stmt->execute();
 		return true;
-		} catch (Exception) {
+		} catch (Exception $ex) {
 			return false;
 		}
 	}
@@ -98,7 +98,7 @@ class MaterialsModel extends Model {
 			$stmt->bindValue(":slug", $slug, PDO::PARAM_STR);
 			$stmt->execute();
 			return true;
-		} catch (Exception) {
+		} catch (Exception $ex) {
 			return false;
 		}
 	}
