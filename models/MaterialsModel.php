@@ -73,7 +73,7 @@ class MaterialsModel extends Model {
 		try {
 		$sql = "UPDATE materials
 				SET name = :nameMaterial, autor = :autor, id_type = :typeMaterial, id_category = :category, description = :description
-				WHERE id = (SELECT id FROM materials WHERE slug = :slug)
+				WHERE materials.id = (SELECT * FROM(SELECT id FROM materials WHERE slug = :slug) AS t1)
 				";
 		$stmt = $this->db->prepare($sql);
 		$stmt->bindValue(":nameMaterial", $name, PDO::PARAM_STR);
@@ -92,7 +92,7 @@ class MaterialsModel extends Model {
 	public function deleteMaterial($slug) {
 		try {
 			$sql = "DELETE FROM materials
-				WHERE id = (SELECT id FROM materials WHERE slug = :slug)
+				WHERE materials.id = (SELECT * FROM(SELECT materials.id FROM materials WHERE materials.slug = :slug) AS t1)
 				";
 			$stmt = $this->db->prepare($sql);
 			$stmt->bindValue(":slug", $slug, PDO::PARAM_STR);
